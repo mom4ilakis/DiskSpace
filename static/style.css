@@ -1,0 +1,36 @@
+body {
+    background-color: black;
+    color: white;
+}
+
+.space_usage {
+    font-size: 30px;
+    align-content: space-between;
+    display: flex;
+    justify-content: space-around;
+}
+
+.free_space_text {
+    color: green;
+}
+
+.used_space_text {
+    color: orange;
+}
+
+.space_bar {
+    width: 100%;
+    height: 10vh;
+    background-color: green;
+}
+
+.used_space_bar {
+    height: 100%;
+    background-color: orange;
+}
+
+.used_space_percent {
+    text-align: center;
+    font-size: 30px;
+    padding-top: 25px;
+}
