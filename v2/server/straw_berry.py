@@ -5,7 +5,7 @@ import typing
 import strawberry
 
 from disk_space import get_space, SpaceType
-
+from v2.server.validations import is_valid_path
 
 
 @strawberry.type
@@ -30,29 +30,30 @@ class DiskInfo:
 class Query:
 
     @strawberry.field
-    def disk_info(self, dir_to_scan: str, units: str) -> DiskInfo:
-        return DiskInfo(dir_to_scan, units)
+    def disk_info(self, dir_to_scan: str, units: str) -> typing.Optional[DiskInfo]:
+        if is_valid_path(dir_to_scan):
+            return DiskInfo(dir_to_scan, units)
+        else:
+            return None
 
 
 @strawberry.type
 class Subscription:
     @strawberry.subscription
-    async def disk_info_sub(self, dir_to_scan: str, units: str) -> typing.AsyncGenerator[DiskInfo, None]:
-        dir_size_info = shutil.disk_usage(dir_to_scan)
-        yield DiskInfo(dir_to_scan, units)
-        while True:
-            curr_dir_size_info = shutil.disk_usage(dir_to_scan)
-            if dir_size_info != curr_dir_size_info:
-                dir_size_info = curr_dir_size_info
-                yield DiskInfo(dir_to_scan, units)
-            time.sleep(30)
+    async def disk_info_sub(self, dir_to_scan: str, units: str) -> \
+            typing.Optional[typing.AsyncGenerator[DiskInfo, None]]:
 
-
-@strawberry.type
-class Query:
-    @strawberry.field
-    def version(self) -> str:
-        return 'v2'
+        if is_valid_path(dir_to_scan):
+            dir_size_info = shutil.disk_usage(dir_to_scan)
+            yield DiskInfo(dir_to_scan, units)
+            while True:
+                curr_dir_size_info = shutil.disk_usage(dir_to_scan)
+                if dir_size_info != curr_dir_size_info:
+                    dir_size_info = curr_dir_size_info
+                    yield DiskInfo(dir_to_scan, units)
+                time.sleep(30)
+        else:
+            return
 
 
 schema = strawberry.Schema(query=Query, subscription=Subscription)

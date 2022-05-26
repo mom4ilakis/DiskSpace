@@ -11,6 +11,7 @@ const DiskInfo = (props) => {
 	return (
 		<React.Fragment>
 			<div className={props.className}>
+				{props.path}
 				<UsedSpaceDiv>Used: {props.used_space} {props.units}</UsedSpaceDiv>
 				<FreeSpaceDiv>Free: {props.free_space} {props.units}</FreeSpaceDiv>
 				<TotalSpaceDiv>Total: {props.total_space} {props.units}</TotalSpaceDiv>
@@ -25,14 +26,16 @@ DiskInfo.propTypes = {
 	free_space: PropTypes.number,
 	total_space: PropTypes.number,
 	units: PropTypes.string,
-	className: PropTypes.string
+	className: PropTypes.string,
+	path: PropTypes.string
 };
 
 DiskInfo.defaultProps ={
 	used_space: 50,
 	free_space: 50,
 	total_space: 100,
-	units: "MB"
+	units: "MB",
+	path: "<Placeholder path>"
 };
 
 export {DiskInfo as DiskInfoUnstyled};
