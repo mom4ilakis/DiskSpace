@@ -9,7 +9,7 @@ import App from "./components/main_page/index";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const apolloClient = new ApolloClient({
-	uri: "localhost:8081/graphql",
+	uri: "http://localhost:8081/graphql",
 	cache: new InMemoryCache()
 });
 
