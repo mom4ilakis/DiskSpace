@@ -5,3 +5,4 @@ venv
 # dependencies
 node_modules
 /v2/client/node_modules/
+__pycache__
