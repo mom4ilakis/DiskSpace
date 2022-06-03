@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from strawberry.fastapi import GraphQLRouter
 
 from straw_berry import schema
-from v2.server.validations import ALLOWED_PATHS
+from validations import ALLOWED_PATHS
 
 graphql_app = GraphQLRouter(schema)
 
