@@ -5,7 +5,7 @@ import typing
 import strawberry
 
 from disk_space import get_space, SpaceType
-from v2.server.validations import is_valid_path
+from validations import is_valid_path
 
 
 @strawberry.type
