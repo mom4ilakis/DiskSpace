@@ -6,36 +6,36 @@ import PercentBar from "../percent_bar";
 
 
 const DiskInfo = (props) => {
-	const percent_used = (props.used_space / props.total_space * 100) % 100;
+	const percentUsed = Math.round((props.usedSpace / props.totalSpace * 100) % 100);
 
 	return (
 		<React.Fragment>
 			<div className={props.className}>
 				{props.path}
-				<UsedSpaceDiv>Used: {props.used_space} {props.units}</UsedSpaceDiv>
-				<FreeSpaceDiv>Free: {props.free_space} {props.units}</FreeSpaceDiv>
-				<TotalSpaceDiv>Total: {props.total_space} {props.units}</TotalSpaceDiv>
+				<UsedSpaceDiv>Used: {props.usedSpace} {props.units}</UsedSpaceDiv>
+				<FreeSpaceDiv>Free: {props.freeSpace} {props.units}</FreeSpaceDiv>
+				<TotalSpaceDiv>Total: {props.totalSpace} {props.units}</TotalSpaceDiv>
 			</div>
-			<PercentBar percent_used={percent_used}/>
+			<PercentBar percent_used={percentUsed}/>
 		</React.Fragment>
 	);
 };
 
 DiskInfo.propTypes = {
-	used_space: PropTypes.number,
-	free_space: PropTypes.number,
-	total_space: PropTypes.number,
+	usedSpace: PropTypes.number,
+	freeSpace: PropTypes.number,
+	totalSpace: PropTypes.number,
 	units: PropTypes.string,
 	className: PropTypes.string,
 	path: PropTypes.string
 };
 
-DiskInfo.defaultProps ={
-	used_space: 50,
-	free_space: 50,
-	total_space: 100,
-	units: "MB",
-	path: "<Placeholder path>"
-};
+// DiskInfo.defaultProps ={
+// 	usedSpace: 50,
+// 	freeSpace: 50,
+// 	totalSpace: 100,
+// 	units: "MB",
+// 	path: "<Placeholder path>"
+// };
 
 export {DiskInfo as DiskInfoUnstyled};

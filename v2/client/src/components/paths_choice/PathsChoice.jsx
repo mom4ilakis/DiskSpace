@@ -1,19 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
 import api from "../../utils/api";
-import {PathUnstyled} from "../path/Path";
+import Path from "../path";
 
 
 
 const PathsChoice = (props) => {
 	const [allowedPaths, setPaths] = React.useState([]);
 	React.useEffect(() => {
-		api.get_paths().then(response => setPaths(response.data));
+		api.getPaths().then(response => {
+			setPaths(response.data);
+		});
 	}, []);
 
 	return(
 		<div className={props.className}>
-			{allowedPaths.map((path) => <PathUnstyled key={path} path={path}>{path}</PathUnstyled>)}
+			{allowedPaths.map((path) => <Path key={path} path={path}>{path}</Path>)}
 		</div>
 	);
 

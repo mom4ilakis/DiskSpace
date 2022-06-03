@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import {useQuery} from "@apollo/client";
 
-import Disk_info from "../disk_info";
+import DiskInfo from "../disk_info";
 import {DiskSpaceQueryTemplate} from "../../utils/queries";
 
 const Path = (props) => {
@@ -11,7 +11,7 @@ const Path = (props) => {
 	const [tracking, setTracking] = useState(false);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(undefined);
-	const [data, setData] = useState({});
+	const [diskInfo, setDiskInfo] = useState({});
 
 	useQuery(
 		DiskSpaceQueryTemplate, {
@@ -19,8 +19,14 @@ const Path = (props) => {
 				path,
 				units: "MB"
 			},
-			onCompleted: (data) => {
-				setData(data);
+			onCompleted: ({diskInfo}) => {
+				setDiskInfo({
+					freeSpace: diskInfo.freeSpace,
+					totalSpace: diskInfo.totalSpace,
+					usedSpace: diskInfo.usedSpace,
+					units: diskInfo.units,
+					path: diskInfo.dirToScan
+				});
 				setLoading(false);
 			},
 			onError: (error) => {
@@ -44,7 +50,7 @@ const Path = (props) => {
 	return (
 		<div>
 			{tracking
-				? <Disk_info props={data} path={path}/>
+				? <DiskInfo {...diskInfo} path={path}/>
 				: <button onClick={startTracking}>Track {path}</button>
 			}
 			{tracking && <button onClick={stopTracking}>Stop tracking {path}</button>}
