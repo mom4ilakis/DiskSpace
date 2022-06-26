@@ -1,15 +1,21 @@
 import os
 
 
-def default_config_path():
+def config_path():
+    path = os.environ.get('PATHS_CONFIG_FILENAME', '')
+
+    if path:
+        return path
+
     filename = 'path.conf'
     dir_name = os.path.dirname(__file__)
+
     return os.path.join(dir_name, filename)
 
 
 class AllowedPaths(object):
-    def __init__(self, config_path=None):
-        self.conf_path = config_path if config_path else default_config_path()
+    def __init__(self):
+        self.conf_path = config_path()
         self._paths_from_env = set()
         self._paths_from_conf = set()
 
