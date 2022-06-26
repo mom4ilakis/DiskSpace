@@ -3,7 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from strawberry.fastapi import GraphQLRouter
 
 from straw_berry import schema
-from validations import ALLOWED_PATHS
+from allowed_paths import AllowedPaths
+
+paths = AllowedPaths()
 
 graphql_app = GraphQLRouter(schema)
 
@@ -31,4 +33,4 @@ async def root():
 
 @app.get('/allowed_paths')
 async def get_allowed_paths():
-    return list(ALLOWED_PATHS)
+    return paths.allowed_paths
