@@ -7,7 +7,6 @@ import PercentBar from "../percent_bar";
 
 const DiskInfo = (props) => {
 	const percentUsed = Math.round((props.usedSpace / props.totalSpace * 100) % 100);
-
 	return (
 		<React.Fragment>
 			<div className={props.className}>
@@ -16,7 +15,7 @@ const DiskInfo = (props) => {
 				<FreeSpaceDiv>Free: {props.freeSpace} {props.units}</FreeSpaceDiv>
 				<TotalSpaceDiv>Total: {props.totalSpace} {props.units}</TotalSpaceDiv>
 			</div>
-			<PercentBar percent_used={percentUsed}/>
+			<PercentBar percentUsed={percentUsed}/>
 		</React.Fragment>
 	);
 };
@@ -29,13 +28,5 @@ DiskInfo.propTypes = {
 	className: PropTypes.string,
 	path: PropTypes.string
 };
-
-// DiskInfo.defaultProps ={
-// 	usedSpace: 50,
-// 	freeSpace: 50,
-// 	totalSpace: 100,
-// 	units: "MB",
-// 	path: "<Placeholder path>"
-// };
 
 export {DiskInfo as DiskInfoUnstyled};

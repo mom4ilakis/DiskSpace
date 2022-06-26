@@ -8,10 +8,12 @@ from validations import ALLOWED_PATHS
 graphql_app = GraphQLRouter(schema)
 
 ALLOWED_ORIGINS = [
-    'http://localhost:3000'
+    'http://localhost:3000',
+    'http://192.168.0.141:3000'
 ]
 
 app = FastAPI()
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
