@@ -7,33 +7,11 @@ import DiskInfo from "../disk_info";
 import {DiskSpaceSubTemplate} from "../../utils/queries";
 
 
-const UnitsSelect = (props) => {
-	const {options, onSelect, defaultOption} = props;
-	return(
-		<select onChange={onSelect} defaultValue={defaultOption}>{
-			options.map(option=>
-				<option key={option} value={option}>{option}</option>)
-		}</select>
-	);
-};
-
-UnitsSelect.propTypes = {
-	options: PropTypes.array,
-	onSelect: PropTypes.func,
-	className: PropTypes.string,
-	defaultOption: PropTypes.string
-};
-
-const Path = (props) => {
-	const selectUnit = (e) => setUnits(e.target.value);
-
-	const UNITS = ["KB", "MB", "GB"];
-	const path = props.path;
+const Path = ({path, units}) => {
 
 	const [isLoading, setLoading] = useState(true);
 	const [error, setError] = useState(undefined);
 	const [diskInfo, setDiskInfo] = useState({});
-	const [units, setUnits] = useState("GB");
 
 	useSubscription(DiskSpaceSubTemplate, {
 		variables:{
@@ -60,15 +38,15 @@ const Path = (props) => {
 	return (
 		isLoading
 			? <div>Loading ...</div>
-			: <React.Fragment>
-				<UnitsSelect options={UNITS} defaultOption={"GB"} onSelect={selectUnit}/>
+			: <div>
 				<DiskInfo {...diskInfo} path={path}/>
-			</React.Fragment>
+			</div>
 	);
 };
 
 Path.propTypes = {
-	path: PropTypes.string
+	path: PropTypes.string,
+	units: PropTypes.string
 };
 
 export {Path as PathUnstyled};

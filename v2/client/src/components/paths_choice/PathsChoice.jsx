@@ -1,7 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import PropTypes from "prop-types";
+
 import api from "../../utils/api";
 import Path from "../path";
+import UnitsSelect from "../units_select";
 
 
 
@@ -10,7 +12,9 @@ const PathsChoice = (props) => {
 	const [trackedPaths, setTrackedPaths] = React.useState([]);
 	const [pathTrackers, setPathTrackers] = React.useState({});
 	const [isLoading, setLoading] = React.useState(true);
-
+	const [units, setUnits] = useState("GB");
+	const UNITS = ["KB", "MB", "GB"];
+	const selectUnit = (e) => setUnits(e.target.value);
 
 
 	React.useEffect(() => {
@@ -42,7 +46,6 @@ const PathsChoice = (props) => {
 			});
 
 			setPathTrackers(trackersMap);
-			// console.log(tracked);
 			setTrackedPaths(tracked);
 			setLoading(false);
 		});
@@ -56,8 +59,11 @@ const PathsChoice = (props) => {
 					: allowedPaths.map((path) =>
 						trackedPaths.includes(path)
 							? <div key={path}>
-								<button onClick={pathTrackers[path].remove}>Stop tracking {path}</button>
-								<Path path={path}>{path}</Path>
+								<div>
+									<button onClick={pathTrackers[path].remove}>Stop tracking {path}</button>
+									<UnitsSelect units={units} options={UNITS} defaultOption={"GB"} onSelect={selectUnit}/>
+								</div>
+								<Path units={units} path={path}>{path}</Path>
 							</div>
 							: <button key={`add-${path}`} onClick={pathTrackers[path].add}>Track {path}</button>)
 			}
