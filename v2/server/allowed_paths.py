@@ -43,7 +43,7 @@ class AllowedPaths(object):
     @property
     def _conf_paths(self):
         if self._paths_from_conf:
-            return self._paths_from_env
+            return self._paths_from_conf
         with open(self.conf_path) as file:
             paths = set([path[:-1] for path in file.readlines()])
             self._paths_from_conf = paths
