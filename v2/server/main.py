@@ -34,7 +34,7 @@ async def root():
 
 @app.get('/allowed_paths')
 async def get_allowed_paths():
-    return PathManager.allowed_paths
+    return sorted(PathManager.allowed_paths)
 
 
 if __name__ == '__main__':

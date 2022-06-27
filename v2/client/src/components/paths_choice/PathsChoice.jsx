@@ -15,15 +15,36 @@ const PathsChoice = (props) => {
 
 	React.useEffect(() => {
 		api.getPaths().then(response => {
-			setPaths(response.data);
+			const pathsFromServer = response.data;
+			const pathsFromLS = localStorage.getItem("TRACKED_PATHS");
 			const trackersMap = {};
+			const tracked = [];
+			// console.log(pathsFromLS);
+			setPaths(pathsFromServer);
 
-			response.data.forEach((path) =>
+			pathsFromServer.forEach((path) =>{
+				if (pathsFromLS.includes(path)) {
+					tracked.push(path);
+				}
 				trackersMap[path] = {
-					add : () => setTrackedPaths((trackedPaths) => [...trackedPaths, path]),
-					remove : () => setTrackedPaths((trackedPaths) => trackedPaths.filter((p) => p !== path))
-				});
+					add : () => {
+						setTrackedPaths((trackedPaths) => {
+							const newTrackedPaths = [...trackedPaths, path];
+							localStorage.setItem("TRACKED_PATHS", newTrackedPaths);
+							return newTrackedPaths;
+						});
+					},
+					remove : () => setTrackedPaths((trackedPaths) => {
+						const newTrackedPaths = trackedPaths.filter((p) => p !== path);
+						localStorage.setItem("TRACKED_PATHS", newTrackedPaths);
+						return newTrackedPaths;
+					})
+				};
+			});
+
 			setPathTrackers(trackersMap);
+			// console.log(tracked);
+			setTrackedPaths(tracked);
 			setLoading(false);
 		});
 	}, []);

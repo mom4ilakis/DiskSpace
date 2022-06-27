@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {DiskInfoUnstyled} from "./DiskInfo";
 
 export const UsedSpaceDiv = styled.div`
-	color: orange;
+	color: var(--used-space-main-color);
 `;
 export const FreeSpaceDiv = styled.div`
 	color: green;

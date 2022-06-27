@@ -60,11 +60,10 @@ const Path = (props) => {
 	return (
 		isLoading
 			? <div>Loading ...</div>
-			: <div>
+			: <React.Fragment>
 				<UnitsSelect options={UNITS} defaultOption={"GB"} onSelect={selectUnit}/>
 				<DiskInfo {...diskInfo} path={path}/>
-			</div>
-
+			</React.Fragment>
 	);
 };
 

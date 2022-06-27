@@ -7,6 +7,13 @@ import PercentBar from "../percent_bar";
 
 const DiskInfo = (props) => {
 	const percentUsed = Math.round((props.usedSpace / props.totalSpace * 100) % 100);
+	const usedColorRGB = () => {
+		const baseGreenAmount = 150;
+		const greenAmount = percentUsed <= 75 ? baseGreenAmount :
+			baseGreenAmount * ((100 - percentUsed) / 100);
+		return `rgb(255, ${greenAmount}, 0)`;
+
+	};
 	return (
 		<React.Fragment>
 			<div className={props.className}>
@@ -15,7 +22,7 @@ const DiskInfo = (props) => {
 				<FreeSpaceDiv>Free: {props.freeSpace} {props.units}</FreeSpaceDiv>
 				<TotalSpaceDiv>Total: {props.totalSpace} {props.units}</TotalSpaceDiv>
 			</div>
-			<PercentBar percentUsed={percentUsed}/>
+			<PercentBar percentUsed={percentUsed} useColor={usedColorRGB()}/>
 		</React.Fragment>
 	);
 };
