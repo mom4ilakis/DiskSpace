@@ -1,8 +1,9 @@
 import axios from "axios";
 
 const PATHS_URI = "/allowed_paths";
+export const baseURL = "http://localhost:8081";
 
-axios.defaults.baseURL = "http://localhost:8081";
+axios.defaults.baseURL = baseURL;
 
 const api = {
 	getPaths: () => {

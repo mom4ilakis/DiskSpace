@@ -4,12 +4,12 @@ import PropTypes from "prop-types";
 import {PercentDisplay, SpaceDiv} from "./styles";
 
 
-const PercentBar = ({percent_used, className}) => {
+const PercentBar = ({percentUsed, className}) => {
 	return(
 		<SpaceDiv>
 			<div className={className}>
 				<PercentDisplay>
-					{percent_used}%
+					{percentUsed}%
 				</PercentDisplay>
 			</div>
 		</SpaceDiv>
@@ -17,7 +17,7 @@ const PercentBar = ({percent_used, className}) => {
 };
 
 PercentBar.propTypes = {
-	percent_used: PropTypes.number,
+	percentUsed: PropTypes.number,
 	className: PropTypes.string
 };
 

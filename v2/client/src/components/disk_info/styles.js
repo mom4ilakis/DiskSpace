@@ -8,7 +8,7 @@ export const FreeSpaceDiv = styled.div`
 	color: green;
 `;
 export const TotalSpaceDiv = styled.div`
-	color: black;
+	color: inherit;
 `;
 
 export const DiskInfo = styled(DiskInfoUnstyled)`

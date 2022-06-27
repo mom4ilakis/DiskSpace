@@ -1,11 +1,10 @@
-import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 from strawberry.fastapi import GraphQLRouter
 
 from straw_berry import schema
-from validations import ALLOWED_PATHS
+from allowed_paths import PathManager
 
 graphql_app = GraphQLRouter(schema)
 
@@ -13,6 +12,7 @@ ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://192.168.0.158:3000',
     'http://my.media.server:3000'
+    'http://192.168.0.141:3000'
 ]
 
 app = FastAPI()
@@ -34,7 +34,7 @@ async def root():
 
 @app.get('/allowed_paths')
 async def get_allowed_paths():
-    return list(ALLOWED_PATHS)
+    return PathManager.allowed_paths
 
 
 if __name__ == '__main__':
