@@ -1,7 +1,9 @@
+from v2.server.allowed_paths import PathManager
+
 ALLOWED_PATHS = set([
     'G:\\'
 ])
 
 
 def is_valid_path(path_to_check):
-    return path_to_check in ALLOWED_PATHS
+    return PathManager.is_path_allowed(path_to_check)

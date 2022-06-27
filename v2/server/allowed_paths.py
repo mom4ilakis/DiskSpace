@@ -14,10 +14,18 @@ def config_path():
 
 
 class AllowedPaths(object):
+    _instance = None
+
     def __init__(self):
         self.conf_path = config_path()
         self._paths_from_env = set()
         self._paths_from_conf = set()
+
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(AllowedPaths, cls).__new__(cls)
+
+            return cls._instance
 
     @property
     def _env_paths(self):
@@ -55,3 +63,6 @@ class AllowedPaths(object):
 
     def is_path_allowed(self, path):
         return path in self._allowed_paths
+
+
+PathManager = AllowedPaths()
