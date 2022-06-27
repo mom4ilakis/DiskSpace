@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const PATHS_URI = "/allowed_paths";
-export const baseURL = "http://localhost:8081";
+export const baseIPP =  "192.168.0.158:8081";
+export const baseURL = "http://" + baseIPP;
 
 axios.defaults.baseURL = baseURL;
 

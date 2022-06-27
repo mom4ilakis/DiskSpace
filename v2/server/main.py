@@ -10,9 +10,9 @@ graphql_app = GraphQLRouter(schema)
 
 ALLOWED_ORIGINS = [
     'http://localhost:3000',
-    'http://192.168.0.158:3000',
-    'http://my.media.server:3000'
-    'http://192.168.0.141:3000'
+    'http://192.168.0.158',
+    'http://192.168.0.141',
+    'http://my.media.server:3000',
 ]
 
 app = FastAPI()

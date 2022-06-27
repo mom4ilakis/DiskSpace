@@ -4,12 +4,12 @@ import {ApolloClient, ApolloProvider, HttpLink, InMemoryCache, split} from "@apo
 
 import "./index.css";
 import App from "./components/main_page/index";
-import {baseURL} from "./utils/api";
+import {baseIPP} from "./utils/api";
 import {GraphQLWsLink} from "@apollo/client/link/subscriptions";
 import {createClient} from "graphql-ws";
 import {getMainDefinition} from "@apollo/client/utilities";
 
-const graphqlULR = "//localhost:8081" + "/graphql";
+const graphqlULR = baseIPP + "/graphql";
 
 const wslink = new GraphQLWsLink(createClient({url: "ws:" + graphqlULR}));
 const httpLink = new HttpLink({

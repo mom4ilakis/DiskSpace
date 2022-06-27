@@ -1,3 +1,4 @@
+import json
 import os
 
 
@@ -7,7 +8,7 @@ def config_path():
     if path:
         return path
 
-    filename = 'path.conf'
+    filename = 'path.json'
     dir_name = os.path.dirname(__file__)
 
     return os.path.join(dir_name, filename)
@@ -31,9 +32,14 @@ class AllowedPaths(object):
     def _env_paths(self):
         if self._paths_from_env:
             return self._paths_from_env
+        paths = os.environ.get('ALLOWED_PATHS_TO_SCAN', '')
 
-        paths = set(os.environ.get('ALLOWED_PATHS_TO_SCAN', '').split(' '))
-        self._paths_from_env = paths
+        if paths:
+            paths = set(paths.split(' '))
+            self._paths_from_env = paths
+        else:
+            paths = set()
+
         return paths
 
     @property
@@ -44,10 +50,14 @@ class AllowedPaths(object):
     def _conf_paths(self):
         if self._paths_from_conf:
             return self._paths_from_conf
-        with open(self.conf_path) as file:
-            paths = set([path[:-1] for path in file.readlines()])
-            self._paths_from_conf = paths
-            return paths
+        try:
+            with open(self.conf_path) as file:
+                data = json.load(file)
+                paths = set(data['paths'])
+                self._paths_from_conf = paths
+                return paths
+        except FileNotFoundError:
+            return set()
 
     @property
     def conf_paths(self):

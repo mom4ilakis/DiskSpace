@@ -16,10 +16,9 @@ const PathsChoice = (props) => {
 	React.useEffect(() => {
 		api.getPaths().then(response => {
 			const pathsFromServer = response.data;
-			const pathsFromLS = localStorage.getItem("TRACKED_PATHS");
+			const pathsFromLS = localStorage.getItem("TRACKED_PATHS") || [];
 			const trackersMap = {};
 			const tracked = [];
-			// console.log(pathsFromLS);
 			setPaths(pathsFromServer);
 
 			pathsFromServer.forEach((path) =>{
