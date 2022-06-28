@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import api from "../../utils/api";
 import Path from "../path";
 import UnitsSelect from "../units_select";
+import {PathDiv, TrackButton, TrackButtonDiv} from "./styles";
 
 
 
@@ -58,14 +59,14 @@ const PathsChoice = (props) => {
 					<div>Loading...</div>
 					: allowedPaths.map((path) =>
 						trackedPaths.includes(path)
-							? <div key={path}>
-								<div>
-									<button onClick={pathTrackers[path].remove}>Stop tracking {path}</button>
-									<UnitsSelect units={units} options={UNITS} defaultOption={"GB"} onSelect={selectUnit}/>
-								</div>
+							? <PathDiv key={path}>
+								<button onClick={pathTrackers[path].remove}>Stop</button>
 								<Path units={units} path={path}>{path}</Path>
-							</div>
-							: <button key={`add-${path}`} onClick={pathTrackers[path].add}>Track {path}</button>)
+								<UnitsSelect units={units} options={UNITS} defaultOption={"GB"} onSelect={selectUnit}/>
+							</PathDiv>
+							:<TrackButtonDiv>
+								<TrackButton key={`add-${path}`} onClick={pathTrackers[path].add}>Track {path}</TrackButton>
+							</TrackButtonDiv>)
 			}
 		</div>
 	);
