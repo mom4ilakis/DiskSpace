@@ -13,9 +13,17 @@ const PathsChoice = (props) => {
 	const [trackedPaths, setTrackedPaths] = React.useState([]);
 	const [pathTrackers, setPathTrackers] = React.useState({});
 	const [isLoading, setLoading] = React.useState(true);
-	const [units, setUnits] = useState("GB");
+	const [units, setUnits] = useState({});
 	const UNITS = ["KB", "MB", "GB"];
-	const selectUnit = (e) => setUnits(e.target.value);
+
+	const selectUnit = (e) => {
+		const [path, unit] = e.target.value.split("-");
+		setUnits((units) => {
+			const newUnits = {...units};
+			newUnits[path] = unit;
+			return newUnits;
+		});
+	};
 
 
 	React.useEffect(() => {
@@ -23,6 +31,7 @@ const PathsChoice = (props) => {
 			const pathsFromServer = response.data;
 			const pathsFromLS = localStorage.getItem("TRACKED_PATHS") || [];
 			const trackersMap = {};
+			const unitsMap = {};
 			const tracked = [];
 			setPaths(pathsFromServer);
 
@@ -30,6 +39,9 @@ const PathsChoice = (props) => {
 				if (pathsFromLS.includes(path)) {
 					tracked.push(path);
 				}
+
+				unitsMap[path] = UNITS[2];
+
 				trackersMap[path] = {
 					add : () => {
 						setTrackedPaths((trackedPaths) => {
@@ -49,6 +61,7 @@ const PathsChoice = (props) => {
 			setPathTrackers(trackersMap);
 			setTrackedPaths(tracked);
 			setLoading(false);
+			setUnits(unitsMap);
 		});
 	}, []);
 
@@ -61,8 +74,8 @@ const PathsChoice = (props) => {
 						trackedPaths.includes(path)
 							? <PathDiv key={path}>
 								<button onClick={pathTrackers[path].remove}>Stop</button>
-								<Path units={units} path={path}>{path}</Path>
-								<UnitsSelect units={units} options={UNITS} defaultOption={"GB"} onSelect={selectUnit}/>
+								<Path units={units[path]} path={path}>{path}</Path>
+								<UnitsSelect units={units} options={UNITS} selected={units[path]} path={path} onSelect={selectUnit}/>
 							</PathDiv>
 							:<TrackButtonDiv>
 								<TrackButton key={`add-${path}`} onClick={pathTrackers[path].add}>Track {path}</TrackButton>
