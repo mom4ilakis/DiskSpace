@@ -8,7 +8,9 @@ const UnitsSelect = (props) => {
 		<div className={props.className}>
 			{
 				options.map(option =>
-					<UnitsChoiceDiv key={option} id={path} onClick={onSelect}>{option}</UnitsChoiceDiv>
+					<UnitsChoiceDiv key={option} id={path} onClick={onSelect} selected={option === selected}>
+						{option}
+					</UnitsChoiceDiv>
 				)
 			}
 		</div>
