@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {UnitsInputDiv} from "./styles";
+import {UnitsChoiceDiv, UnitsInputDiv} from "./styles";
 
 const UnitsSelect = (props) => {
 	const {options, onSelect, selected, path} = props;
@@ -8,11 +8,8 @@ const UnitsSelect = (props) => {
 		<div className={props.className}>
 			{
 				options.map(option =>
-					<UnitsInputDiv key={option}>
-						<input  id={option} type={"radio"} value={`${path}-${option}`} checked={option === selected}
-							onChange={onSelect}/>
-						<label htmlFor={option}>{option}</label>
-					</UnitsInputDiv>)
+					<UnitsChoiceDiv key={option} id={path} onClick={onSelect}>{option}</UnitsChoiceDiv>
+				)
 			}
 		</div>
 	);

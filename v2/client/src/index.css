@@ -3,7 +3,8 @@ body {
     color: white;
 }
 :root {
-  --used-space-main-color: rgb(255,150,0)
+  --used-space-main-color: rgb(255,150,0);
+
 }
 
 @keyframes loadBar {
@@ -12,7 +13,7 @@ body {
   }
 
   to {
-    width: 100%;
+    width: var(--max-width, 100%);
   }
 
 }

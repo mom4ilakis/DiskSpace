@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import api from "../../utils/api";
 import Path from "../path";
 import UnitsSelect from "../units_select";
-import {PathDiv, TrackButton, TrackButtonDiv} from "./styles";
+import {ButtonArea, PathDiv, TrackButton, TrackButtonDiv} from "./styles";
 
 
 
@@ -17,7 +17,8 @@ const PathsChoice = (props) => {
 	const UNITS = ["KB", "MB", "GB"];
 
 	const selectUnit = (e) => {
-		const [path, unit] = e.target.value.split("-");
+		const unit = e.target.innerText;
+		const path = e.target.id;
 		setUnits((units) => {
 			const newUnits = {...units};
 			newUnits[path] = unit;
@@ -73,7 +74,10 @@ const PathsChoice = (props) => {
 					: allowedPaths.map((path) =>
 						trackedPaths.includes(path)
 							? <PathDiv key={path}>
-								<button onClick={pathTrackers[path].remove}>Stop</button>
+								<ButtonArea>
+									<button>Refresh</button>
+									<button onClick={pathTrackers[path].remove}>Stop</button>
+								</ButtonArea>
 								<Path units={units[path]} path={path}>{path}</Path>
 								<UnitsSelect units={units} options={UNITS} selected={units[path]} path={path} onSelect={selectUnit}/>
 							</PathDiv>
