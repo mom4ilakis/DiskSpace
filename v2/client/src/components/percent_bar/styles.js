@@ -21,6 +21,8 @@ export const PercentDisplay = styled.div`
 	width: 100%;
 	text-align: center;
     font-size: 30px;
+    
+    animation: fadeIn 2.5s;
 `;
 
 export const SpaceDiv = styled.div`

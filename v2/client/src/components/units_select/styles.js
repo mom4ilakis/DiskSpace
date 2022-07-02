@@ -39,4 +39,8 @@ export const UnitsChoiceDiv = styled.div`
 	
 	color: ${props => props.selected ? "teal" : "inherit"};
 	text-align: center;
+	
+	&:hover: {
+		border-color: teal;
+	}
 `;

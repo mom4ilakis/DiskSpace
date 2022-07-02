@@ -4,15 +4,15 @@ import PropTypes from "prop-types";
 import api from "../../utils/api";
 import Path from "../path";
 import UnitsSelect from "../units_select";
-import {ButtonArea, PathDiv, TrackButton, TrackButtonDiv} from "./styles";
+import {ButtonArea, PathDiv, StopButton, TrackButton, TrackButtonDiv} from "./styles";
 
 
 
 const PathsChoice = (props) => {
-	const [allowedPaths, setPaths] = React.useState([]);
-	const [trackedPaths, setTrackedPaths] = React.useState([]);
-	const [pathTrackers, setPathTrackers] = React.useState({});
-	const [isLoading, setLoading] = React.useState(true);
+	const [allowedPaths, setPaths] = useState([]);
+	const [trackedPaths, setTrackedPaths] = useState([]);
+	const [pathTrackers, setPathTrackers] = useState({});
+	const [isLoading, setLoading] = useState(true);
 	const [units, setUnits] = useState({});
 	const UNITS = ["KB", "MB", "GB"];
 
@@ -25,7 +25,6 @@ const PathsChoice = (props) => {
 			return newUnits;
 		});
 	};
-
 
 	React.useEffect(() => {
 		api.getPaths().then(response => {
@@ -75,11 +74,10 @@ const PathsChoice = (props) => {
 						trackedPaths.includes(path)
 							? <PathDiv key={path}>
 								<ButtonArea>
-									<button>Refresh</button>
-									<button onClick={pathTrackers[path].remove}>Stop</button>
+									<UnitsSelect units={units} options={UNITS} selected={units[path]} path={path} onSelect={selectUnit}/>
+									<StopButton onClick={pathTrackers[path].remove}>Stop</StopButton>
 								</ButtonArea>
 								<Path units={units[path]} path={path}>{path}</Path>
-								<UnitsSelect units={units} options={UNITS} selected={units[path]} path={path} onSelect={selectUnit}/>
 							</PathDiv>
 							:<TrackButtonDiv>
 								<TrackButton key={`add-${path}`} onClick={pathTrackers[path].add}>Track {path}</TrackButton>

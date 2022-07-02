@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 
 import {useSubscription} from "@apollo/client";
@@ -46,7 +46,8 @@ const Path = ({path, units}) => {
 
 Path.propTypes = {
 	path: PropTypes.string,
-	units: PropTypes.string
+	units: PropTypes.string,
+	refreshSub: PropTypes.number
 };
 
 export {Path as PathUnstyled};

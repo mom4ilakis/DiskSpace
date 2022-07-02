@@ -13,7 +13,7 @@ export const PathChoice = styled(PathChoiceUnstyled)`
 
 export const PathDiv = styled.div`
 	display: grid;
-	grid-template-columns: 5% 90% 5%;
+	grid-template-columns: 5% 95%;
 	column-gap: 10px;
 	padding 25px;
 `;
@@ -26,9 +26,36 @@ export const TrackButtonDiv = styled.div`
 	animation-duration: 500ms;
 `;
 
+export const StopButton = styled.button`
+	border-radius: 5px;
+	border-color: gray;
+	
+	cursor: pointer;
+
+	&:hover {
+		transition: all 250ms ease-in;
+		background-color: red;
+		color: white;
+		
+	}
+`;
+
 export const TrackButton = styled.button`
 	height: 50px;
 	width: 150px;
+	
+	border-radius: 5px;
+	border-color: gray;
+	
+	cursor: pointer;
+	
+	&:hover {
+		background-color: teal;
+		color: white;
+		
+		transition: all 250ms ease-in;
+	}
+	
 `;
 
 export const ButtonArea = styled.div`
@@ -36,7 +63,7 @@ export const ButtonArea = styled.div`
 	width: 100%;
 	
 	display: grid;
-	grid-template-rows: 25% 70%;
+	grid-template-rows: 70% 25%;
 	grid-template-columns: 100%;
 	row-gap: 4px;
 	
