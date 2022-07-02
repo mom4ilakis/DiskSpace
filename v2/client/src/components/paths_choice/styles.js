@@ -22,6 +22,8 @@ export const TrackButtonDiv = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	animation-name: fadeIn;
+	animation-duration: 500ms;
 `;
 
 export const TrackButton = styled.button`
@@ -30,13 +32,14 @@ export const TrackButton = styled.button`
 `;
 
 export const ButtonArea = styled.div`
-  height: 100%;
-  width: 100%;
-
-  display: grid;
-  grid-template-rows: 25% 70%;
-  grid-template-columns: 100%;
-  row-gap: 4px;
-}
-
+	height: 100%;
+	width: 100%;
+	
+	display: grid;
+	grid-template-rows: 25% 70%;
+	grid-template-columns: 100%;
+	row-gap: 4px;
+	
+	animation-name: fadeIn;
+	animation-duration: 500ms;
 `;

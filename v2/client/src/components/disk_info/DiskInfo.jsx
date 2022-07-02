@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {FreeSpaceDiv, TotalSpaceDiv, UsedSpaceDiv} from "./styles";
+import {FreeSpaceDiv, PathText, TotalSpaceDiv, UsedSpaceDiv} from "./styles";
 import PercentBar from "../percent_bar";
 
 
@@ -17,7 +17,7 @@ const DiskInfo = (props) => {
 	return (
 		<React.Fragment>
 			<div className={props.className}>
-				{props.path}
+				<PathText>{props.path}</PathText>
 				<UsedSpaceDiv>Used: {props.usedSpace} {props.units}</UsedSpaceDiv>
 				<FreeSpaceDiv>Free: {props.freeSpace} {props.units}</FreeSpaceDiv>
 				<TotalSpaceDiv>Total: {props.totalSpace} {props.units}</TotalSpaceDiv>

@@ -7,6 +7,27 @@ body {
 
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 100%;
+  }
+
+}
+
+@keyframes expand {
+  from {
+    margin-top: -100%;
+  }
+
+  to {
+    margin-top: 0;
+  }
+}
+
 @keyframes loadBar {
   from {
     width: 0;

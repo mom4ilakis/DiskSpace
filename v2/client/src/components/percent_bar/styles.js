@@ -27,7 +27,7 @@ export const SpaceDiv = styled.div`
 	width: 100%;
     height: 10vh;
     background-color: green;
-    animation-name: loadBar;
+    animation-name: fadeIn;
     animation-duration: 2s;
     margin: 1px;
     border-style: solid;
