@@ -42,7 +42,8 @@ export const StopButton = styled.button`
 
 export const TrackButton = styled.button`
 	height: 50px;
-	width: 150px;
+	max-width: 75%;
+	min-width: 10%;
 	
 	border-radius: 5px;
 	border-color: gray;
