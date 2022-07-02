@@ -15,10 +15,15 @@ export const PercentBar = styled(PercentBarUnstyled)`
 
 export const PercentDisplay = styled.div`
 	display: flex;
+
 	align-items: center;
 	justify-content: center;
+
 	height: 100%;
 	width: 100%;
+
+	min-width: 50px;
+
 	text-align: center;
     font-size: 30px;
     
