@@ -13,7 +13,7 @@ export const PathChoice = styled(PathChoiceUnstyled)`
 
 export const PathDiv = styled.div`
 	display: grid;
-	grid-template-columns: 5% 95%;
+	grid-template-columns: 5% 94%;
 	column-gap: 10px;
 	padding 25px;
 `;
