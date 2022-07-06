@@ -2,7 +2,8 @@
 
 Client written with React
 Server is FastApi with a graphQL extention via strawberry
-This is overengineered for educational purpose
+
+This is overengineered for educational purposes.
 
 Setting up the client:
  * Clone Rep
