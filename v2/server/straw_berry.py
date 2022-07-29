@@ -4,7 +4,9 @@ import typing
 
 import strawberry
 
-from disk_space import get_space, SpaceType
+from disk_space import get_space, SpaceType, MemoryUnits
+from v2.server.cpu import get_cpu_usage
+from v2.server.ram import get_ram_usage
 from validations import is_valid_path
 
 
@@ -24,6 +26,16 @@ class DiskInfo:
     @strawberry.field
     def total_space(self) -> int:
         return get_space(self.dir_to_scan, SpaceType.TOTAL, self.units)
+
+
+@strawberry.type
+class RAMUsage:
+    total: int
+    available: int
+    percent: float
+    used: int
+    free: int
+    units: str
 
 
 @strawberry.type
@@ -53,6 +65,19 @@ class Subscription:
                 await asyncio.sleep(30)
         else:
             return
+
+    @strawberry.subscription
+    async def cup_usage(self, pooling_interval: float = 5) -> typing.Optional[typing.AsyncGenerator[float, None]]:
+        while True:
+            cpu_usage = await get_cpu_usage(pooling_interval)
+            yield cpu_usage
+
+    @strawberry.subscription
+    async def ram_usage(self, units: str) -> typing.Optional[typing.AsyncGenerator[RAMUsage, None]]:
+        while True:
+            ram_usage = get_ram_usage(MemoryUnits[units])
+            yield RAMUsage(**ram_usage)
+            await asyncio.sleep(10)
 
 
 schema = strawberry.Schema(query=Query, subscription=Subscription)

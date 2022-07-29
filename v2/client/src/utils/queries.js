@@ -1,6 +1,6 @@
 import {gql} from "@apollo/client";
 
-const DiskSpaceSubTemplate = gql`
+export const DiskSpaceSubTemplate = gql`
 subscription MySubscription($path: String!, $units: String!) {
   diskInfoSub(dirToScan: $path, units: $units) {
     dirToScan
@@ -11,7 +11,7 @@ subscription MySubscription($path: String!, $units: String!) {
   }
 }`;
 
-const DiskSpaceQueryTemplate = gql`
+export const DiskSpaceQueryTemplate = gql`
 query myQuery($path: String!, $units: String!) {
 	diskInfo(dirToScan: $path, units: $units) {
 		dirToScan
@@ -22,4 +22,15 @@ query myQuery($path: String!, $units: String!) {
 	  }
  }`;
 
-export {DiskSpaceQueryTemplate, DiskSpaceSubTemplate};
+
+export const RamQueryTemplate = gql`
+subscription MySubscription($units: String!) {
+  ramUsage(units: $units) {
+    available
+    free
+    percent
+    total
+    units
+    used
+  }
+}`;
